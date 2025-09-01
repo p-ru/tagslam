@@ -1,9 +1,11 @@
 cam0:
   camera_model: pinhole
-  intrinsics: [1404.917, 1403.505, 962.317, 605.784]
   distortion_model: radtan
-  distortion_coeffs: [-0.161604, 0.093674, -0.000037, -0.000336, 0.000000]
-  resolution: [1920, 1200]
-  rostopic: /pg_17274483/image_raw
+  intrinsics: [961.6914329397898, 960.9682396349043, 719.7830253033549, 550.2453614817554]
+  distortion_coeffs: [-0.01773195880647332, 0.00506034383082459, 0.0016561964505639082, -0.0005950347184636508]
+  resolution: [1440, 1080]
+
+
+  rostopic: /Mavic_3M/image/compressed
   tagtopic: /detector/tags
   rig_body: rig
