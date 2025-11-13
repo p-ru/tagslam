@@ -1,3 +1,4 @@
+<?xml version="1.0"?>
 <launch>
   <arg name="data_dir" default="$(find tagslam)/example"/>
   <arg name="config_dir" default="$(arg data_dir)"/>

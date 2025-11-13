@@ -181,6 +181,17 @@ namespace tagslam {
     if (publishAck_) {
       ackPub_	 = nh_.advertise<std_msgs::Header>("acknowledge", 1);
     }
+
+
+
+    // <<< HEARTBEAT >>> Initialize the heartbeat publisher and timer
+    heartbeat_pub_ = nh_.advertise<std_msgs::Header>("heartbeat", 1);
+    heartbeat_timer_ = nh_.createTimer(ros::Duration(0.1), &TagSlam::heartbeatCallback, this);
+    // <<< END HEARTBEAT >>>
+
+
+
+
     // optimize the initial setup if necessary
     graph_->optimize(0);
     // open output files
@@ -189,6 +200,16 @@ namespace tagslam {
     graph_.reset(initialGraph_->clone());
     return (true);
   }
+
+  // <<< HEARTBEAT >>> Callback function for the heartbeat timer
+  void TagSlam::heartbeatCallback(const ros::TimerEvent& event) {
+    std_msgs::Header msg;
+    msg.stamp = ros::Time::now();
+    heartbeat_pub_.publish(msg);
+  }
+  // <<< END HEARTBEAT >>>
+
+
 
   void TagSlam::subscribe() {
     std::vector<std::vector<std::string>> topics = makeTopics();

@@ -28,7 +28,7 @@
 #include <nav_msgs/Odometry.h>
 #include <nav_msgs/Path.h>
 #include <std_srvs/Trigger.h>
-
+#include <std_msgs/Header.h>
 
 #include <string>
 #include <unordered_map>
@@ -195,6 +195,11 @@ namespace tagslam {
     void copyPosesAndReset();
     TagPtr addTag(int tagId, const BodyPtr &body) const;
     PoseWithNoise getOptimizedPoseWithNoise(const string &name);
+
+    // Heartbeat callback function // <<< ADDED
+    void heartbeatCallback(const ros::TimerEvent& event);
+
+
     // ------ variables --------
     ros::NodeHandle      nh_;
     GraphPtr             graph_;
@@ -254,5 +259,9 @@ namespace tagslam {
     std::vector<MeasurementsPtr> measurements_;
     PoseCacheMap poseCache_;
     ros::Time poseCacheTime_{0};
+
+    // Heartbeat ROS variables // <<< ADDED
+    ros::Publisher heartbeat_pub_;
+    ros::Timer     heartbeat_timer_;
   };
 }

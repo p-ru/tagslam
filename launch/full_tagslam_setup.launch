@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<launch>
+  <!-- Launch roscore (if not already running - usually assumed to be running already) -->
+  <!-- In a typical ROS setup, you would start roscore separately or assume it's running -->
+  <!-- For this example, we'll just assume roscore is already running -->
+
+  <!-- Launch tagslam.launch -->
+  <include file="$(find tagslam)/launch/tagslam.launch">
+    <arg name="run_online" value="true"/> 
+
+    
+    <arg name="tagslam_config_file" value="/home/droneproject/.ros/tagslam_backup.yaml"/>
+  </include>
+
+  <!-- Launch apriltag_detector_node.launch -->
+  <include file="$(find tagslam)/launch/apriltag_detector_node.launch"/>
+
+  <!-- Launch RViz -->
+  <node pkg="rviz" type="rviz" name="rviz" args="-d $(find tagslam)/example/tagslam_example.rviz" />
+
+</launch>
